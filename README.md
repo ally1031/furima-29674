@@ -1,19 +1,19 @@
 
 ## users テーブル
 
-| Column                    | Type    | Options     |
-| ------------------------- | ------- | ----------- |
-| nickname                  | string  | null: false |
-| email                     | string  | null: false |
-| password                  | integer | null: false |
-| password_confirmation     | integer | null: false |
-| family_name               | string  | null: false |
-| first_name                | string  | null: false |
-| family_name_kana          | string  | null: false |
-| first_name_kana           | string  | null: false |
-| year                      | date    | null: false |
-| moon                      | date    | null: false |
-| day                       | date    | null: false |
+| Column                    | Type       | Options           |
+| ------------------------- | ---------- | ----------------- |
+| nickname                  | string     | null: false       |
+| email                     | string     | null: false       |
+| password                  | integer    | null: false       |
+| password_confirmation     | integer    | null: false       |
+| family_name               | string     | null: false       |
+| first_name                | string     | null: false       |
+| family_name_kana          | string     | null: false       |
+| first_name_kana           | string     | null: false       |
+| birthday                  | date       | null: false       |
+| lists_id                  | references | foreign_key: true |
+| buys_id                   | references | foreign_key: true |
 
 ### Association
 
@@ -22,49 +22,50 @@
 
 ## lists テーブル
 
-| Column           | Type      | Options     |
-| ---------------- | --------- | ----------- |
-| image            | timestamp | null: false |
-| title            | string    | null: false |
-| text             | text      | null: false |
-| category         | string    | null: false |
-| status           | string    | null: false |
-| shipping_charges | string    | null: false |
-| shipment_source  | string    | null: false |
-| shipping_days    | integer   | null: false |
-| price            | integer   | null: false |
+| Column              | Type       | Options           |
+| ------------------  | ---------- | ----------------- |
+| title_id            | integer    | null: false       |
+| text_id             | integer    | null: false       |
+| category_id         | integer    | null: false       | 
+| status_id           | integer    | null: false       |
+| shipping_charges_id | integer    | null: false       |
+| shipment_source_id  | integer    | null: false       |
+| shipping_days_id    | integer    | null: false       |
+| price               | integer    | null: false       |
+| users_id            | references | foreign_key: true |
+| buys_id             | references | foreign_key: true |
+| comments_id         | references | foreign_key: true |
 
 ### Association
 
-- has_one :buys
-- belongs_to :users
+- has_one :buy
+- belongs_to :user
 - has_many :comments
 
 ## buys テーブル
 
-| Column          | Type       | Options     |
-| --------------- | ---------- | ------------|
-| number          | integer    | null: false |
-| expiration_date | date       | null: false |
-| security_code   | integer    | null: false |
-| postal_code     | integer    | null: false |
-| prefectures     | string     | null: false |
-| municipality    | string     | null: false |
-| address         | integer    | null: false |
-| building_name   | string     | null: false |
-| phone_number    | integer    | null: false |
+| Column          | Type       | Options           |
+| --------------- | ---------- | ----------------- |
+| postal_code     | string     | null: false       |
+| prefectures_id  | integer    | null: false       |
+| municipality    | string     | null: false       |
+| address         | string     | null: false       |
+| building_name   | string     |                   |
+| phone_number    | string     | null: false       |
+| users_id        | references | foreign_key: true |
+| lists_id        | references | foreign_key: true |
 
 ### Association
 
-- belongs_to :lists
-- belongs_to :users
+- belongs_to :list
+- belongs_to :user
 
 ## comments テーブル
 
-| Column  | Type       | Options      |
-| ------- | ---------- | ------------ |
-| text    | string     | null: false  |
-
+| Column   | Type       | Options           |
+| -------- | ---------- | ----------------- | 
+| text     | string     | null: false       |
+| lists_id | references | foreign_key: true |
 ### Association
 
-- belongs_to :comments
+- belongs_to :comment
