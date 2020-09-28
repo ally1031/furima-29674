@@ -29,19 +29,19 @@
 | shipment_source_id  | integer    | null: false                    |
 | shipping_days_id    | integer    | null: false                    |
 | price               | integer    | null: false                    |
-| user_id            | integer    | null: false, foreign_key: true |
+| user_id             | integer    | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :buys
+- has_one :buy
 - belongs_to :user
 
 ## buys テーブル
 
 | Column          | Type    | Options                        |
 | --------------- | ------- | ------------------------------ |
-| user_id        | integer | null: false, foreign_key: true |
-| list_id        | integer | null: false, foreign_key: true |
+| user_id         | integer | null: false, foreign_key: true |
+| list_id         | integer | null: false, foreign_key: true |
 
 ### Association
 
@@ -59,7 +59,7 @@
 | address         | string  | null: false |
 | building_name   | string  |             |
 | phone_number    | string  | null: false |
-| buy_id         | integer | mull: false |
+| buy_id          | integer | mull: false |
 ### Association
 
 - belongs_to :buy
