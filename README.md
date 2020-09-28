@@ -6,7 +6,6 @@
 | nickname                        | string     | null: false       |
 | email                           | string     | null: false       |
 | encrypted_password              | integer    | null: false       |
-| encrypted_password_confirmation | integer    | null: false       |
 | family_name                     | string     | null: false       |
 | first_name                      | string     | null: false       |
 | family_name_kana                | string     | null: false       |
@@ -30,7 +29,7 @@
 | shipment_source_id  | integer    | null: false                    |
 | shipping_days_id    | integer    | null: false                    |
 | price               | integer    | null: false                    |
-| users_id            | integer    | null: false, foreign_key: true |
+| user_id            | integer    | null: false, foreign_key: true |
 
 ### Association
 
@@ -41,8 +40,8 @@
 
 | Column          | Type    | Options                        |
 | --------------- | ------- | ------------------------------ |
-| users_id        | integer | null: false, foreign_key: true |
-| lists_id        | integer | null: false, foreign_key: true |
+| user_id        | integer | null: false, foreign_key: true |
+| list_id        | integer | null: false, foreign_key: true |
 
 ### Association
 
@@ -60,7 +59,7 @@
 | address         | string  | null: false |
 | building_name   | string  |             |
 | phone_number    | string  | null: false |
-| buys_id         | integer | mull: false |
+| buy_id         | integer | mull: false |
 ### Association
 
 - belongs_to :buy
