@@ -14,10 +14,10 @@
 
 ### Association
 
-- has_many :lists
+- has_many :items
 - has_many :buys
 
-## lists テーブル
+## items テーブル
 
 | Column              | Type       | Options                        |
 | ------------------  | ---------- | ------------------------------ |
@@ -41,11 +41,11 @@
 | Column          | Type    | Options                        |
 | --------------- | ------- | ------------------------------ |
 | user_id         | integer | null: false, foreign_key: true |
-| list_id         | integer | null: false, foreign_key: true |
+| item_id         | integer | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :list
+- belongs_to :item
 - belongs_to :user
 - has_one :address
 
