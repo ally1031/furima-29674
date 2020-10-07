@@ -11,6 +11,5 @@ class Item < ApplicationRecord
 
   validates :image, :title, :text, :genre_id, :status_ah_id, :shipping_charges_ah_id, :shipment_source_ah_id, :shipping_days_ah_id, :price, presence: true
   validates :genre_id, :status_ah_id, :shipping_charges_ah_id, :shipment_source_ah_id, :shipping_days_ah_id, numericality: { other_than: 1 }
-  validates :price,numericality: {greater_than: 300,less_than: 9999999}, format: { with: /\A(?=.*?[\d])[\d]+\z/i.freeze }
-
+  validates :price, numericality: { greater_than: 300, less_than: 9_999_999 }, format: { with: /\A(?=.*?[\d])[\d]+\z/i.freeze }
 end
