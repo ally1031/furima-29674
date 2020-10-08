@@ -9,7 +9,7 @@ class CreateLists < ActiveRecord::Migration[6.0]
       t.integer :shipment_source_ah_id,  null: false
       t.integer :shipping_days_ah_id,    null: false
       t.integer :price,                  null: false
-      t.integer :user_id,                null: false
+      t.integer :user_id,                null: false, foreign_key: true
       t.timestamps
     end
   end
