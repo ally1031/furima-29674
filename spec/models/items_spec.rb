@@ -1,23 +1,25 @@
 require 'rails_helper'
-
-RSpec.describe Items, type: :model do
-  describe '商品出品機能'　do
+RSpec.describe Item, type: :model do
+  describe '商品出品機能' do
     
+    before do
+      @item = FactoryBot.build(:item)
+    end
+
     context '商品出品機能がうまくいくとき' do
-      it 'image,title,text,genre_id,status_ah_id,shipping_charges_ah_id,shipment_source_ah_id,shipping_days_ah_id,priceが存在すれば登録できる' do
+      it 'image,title,text,genre_id,status_ah_id,shipping_charges_ah_id,shipment_source_ah_id,shipping_days_ah_id,price,user_idが存在すれば登録できる' do
         expect(@item).to be_valid
       end
     end
 
     context '商品出品機能がうまくいかないとき' do
+      
       it 'imageが空だと登録できない' do
         @item.image = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
-      it '画像は一枚でないと登録できない'　do
-      end
-
+      
       it 'titleが空では登録できない' do
         @item.title = ''
         @item.valid?
@@ -76,18 +78,6 @@ RSpec.describe Items, type: :model do
         @item.price = '555'
         @item.valid?
         expect(@item.errors.full_messages).to include("")
-      end
-
-      it 'family_nameが全角（漢字・ひらがな・カタカナ）でないと登録できない' do
-        @user.family_name = 'csxs'
-        @user.valid?
-        expect(@user.errors.full_messages).to include('Family name is invalid')
-      end
-
-      it 'first_nameが全角（漢字・ひらがな・カタカナ）でないと登録できない' do
-        @user.first_name = 'sjbd'
-        @user.valid?
-        expect(@user.errors.full_messages).to include('First name is invalid')
       end
     end
   end 
