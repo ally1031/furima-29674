@@ -15,7 +15,7 @@ RSpec.describe Item, type: :model do
     context '商品出品機能がうまくいかないとき' do
       
       it 'imageが空だと登録できない' do
-        @item.image = ''
+        @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
@@ -35,31 +35,31 @@ RSpec.describe Item, type: :model do
       it 'genre_idが空では登録できない' do
         @item.genre_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Genre_id can't be blank")
+        expect(@item.errors.full_messages).to include("Genre can't be blank", "Genre is not a number")
       end
 
       it 'status_ah_idが空だと登録できない' do
         @item.status_ah_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status_ah_id can't be blank")
+        expect(@item.errors.full_messages).to include("Status ah can't be blank", "Status ah is not a number")
       end
 
       it 'shipping_charges_ah_idが空では登録できない' do
         @item.shipping_charges_ah_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping_charges_ah_id can't be blank")
+        expect(@item.errors.full_messages).to include("Shipping charges ah can't be blank", "Shipping charges ah is not a number")
       end
 
       it 'shipment_source_ah_idが空では登録できない' do
         @item.shipment_source_ah_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipment_source_ah_id can't be blank")
+        expect(@item.errors.full_messages).to include("Shipment source ah can't be blank", "Shipment source ah is not a number")
       end
 
       it 'shipping_days_ah_idが空だと登録できない' do
         @item.shipping_days_ah_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping_days_ah_id can't be blank")
+        expect(@item.errors.full_messages).to include("Shipping days ah can't be blank", "Shipping days ah is not a number")
       end
 
       it 'priceが空だと登録できない' do
@@ -69,15 +69,15 @@ RSpec.describe Item, type: :model do
       end
 
       it '価格の範囲が、¥300~¥9,999,999の間でだと登録できない' do
-        @item.price = '555'
+        @item.price = "222"
         @item.valid?
-        expect(@item.errors.full_messages).to include("")
+        expect(@item.errors.full_messages).to include("Price must be greater than 300")
       end
 
       it '価格は半角数字のみでないと登録できない' do
-        @item.price = '555'
+        @item.price = "５５５"
         @item.valid?
-        expect(@item.errors.full_messages).to include("")
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
     end
   end 
