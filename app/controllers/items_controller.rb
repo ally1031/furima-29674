@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_params, only: [:show, :edit, :update]
+  before_action :set_params, only: [:show, :edit, :update,:destroy]
 
   def new
     @item = Item.new
@@ -30,6 +30,11 @@ class ItemsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @item.destroy
+    redirect_to root_path
   end
   
   private
