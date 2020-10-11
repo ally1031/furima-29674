@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_params,only:[:show]
+  before_action :set_params, only:[:show,:edit,:update]
   
   def new
     @item = Item.new
@@ -21,6 +21,17 @@ class ItemsController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
+  def update
+    @item.update(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      render :show
+    end
+  end
   private
 
   def set_params
