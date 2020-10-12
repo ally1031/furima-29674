@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_params, only: [:show, :edit, :update,:destroy]
-
+  before_action :move_to_index, except: [:index,:new,:create,:show]
+  
   def new
     @item = Item.new
   end
@@ -33,8 +34,11 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item.destroy
-    redirect_to root_path
+    if @item.destroy
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
   
   private
@@ -45,5 +49,11 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:image, :title, :text, :genre_id, :status_ah_id, :shipping_charges_ah_id, :shipment_source_ah_id, :shipping_days_ah_id, :price).merge(user_id: current_user.id)
+  end
+
+  def move_to_index
+    unless user_signed_in? && current_user
+      redirect_to action: :index
+    end
   end
 end
