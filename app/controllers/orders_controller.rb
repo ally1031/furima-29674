@@ -1,9 +1,7 @@
 class OrdersController < ApplicationController
-  
-  before_action :set_item, only:[:index,:create]
-  
-  def index
+  before_action :set_item, only: [:index, :create]
 
+  def index
     @order = OrderAddress.new
     # @orders = @room.orders.includes(:user)
   end
@@ -20,7 +18,7 @@ class OrdersController < ApplicationController
   end
 
   private
-  
+
   def set_item
     @item = Item.find(params[:item_id])
   end
