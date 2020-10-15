@@ -19,7 +19,7 @@ function input() {
   const tax = document.getElementById("add-tax-price");
   const profit = document.getElementById("profit");
   
-  data.addEventListener("input", function(){ 
+  data.addEventListener("input",()=> { 
     let price = data.value;
     console.log(price)
     profit.innerHTML = price * 0.9
