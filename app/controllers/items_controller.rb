@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_params, only: [:show, :edit, :update, :destroy]
-  before_action :move_to_index, except: [:index, :new, :create, :show]
+  before_action :move_to_index, except: [:index, :show]
 
   def new
     @item = Item.new
