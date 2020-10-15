@@ -1,9 +1,13 @@
 class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
+  before_action :anthenticate_user!
+  before_action :move_to_index, only: [:index, :create]
 
   def index
     @order = OrderAddress.new
-    # @orders = @room.orders.includes(:user)
+    if current_user.id == @item.user_id || @item.order.present?
+       redirect_to root_path
+    end
   end
 
   def create
@@ -28,35 +32,11 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY'] # PAY.JPテスト秘密鍵
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY'] 
     Payjp::Charge.create(
       amount: @item.price,
-      card: order_params[:token], # カードトークン
-      currency: 'jpy' # 通貨の種類(日本円)
+      card: order_params[:token], 
+      currency: 'jpy' 
     )
   end
 end
-
-# def index
-#  @message = Message.new
-#  @room = Room.find(params[:room_id])
-#  @messages = @room.messages.includes(:user)
-# end
-
-# def create
-#  @room = Room.find(params[:room_id])
-#  @message = @room.messages.new(message_params)
-#  @message.save
-#  if @message.save
-#    redirect_to room_messages_path(@room)
-#  else
-#    @messages = @room.messages.includes(:user)
-#    render :index
-#  end
-# end
-
-# private
-
-# def message_params
-#  params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
-# end
