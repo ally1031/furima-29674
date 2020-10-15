@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :set_params, only: [:show, :edit, :update,:destroy]
-  before_action :move_to_index, except: [:index,:new,:create,:show]
-  
+  before_action :set_params, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_index, except: [:index, :new, :create, :show]
+
   def new
     @item = Item.new
   end
@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
       render :show
     end
   end
-  
+
   private
 
   def set_params
@@ -52,8 +52,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless user_signed_in? && current_user
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless user_signed_in? && current_user
   end
 end
